@@ -1,7 +1,9 @@
 package com.saeyon.controller;
 
 import com.saeyon.vo.MsgVo;
+import com.saeyon.vo.OrderVo;
 import com.saeyon.vo.UserVo;
+import com.saeyon.vo.VisitorVo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -65,5 +67,16 @@ public class ValidatorTestController {
         return MsgVo.SUCCESS;
     }
 
+    @PostMapping("/addOrder")
+    public @ResponseBody
+    MsgVo addOrder(@RequestBody @Validated OrderVo orderVo) {
+        return MsgVo.SUCCESS;
+    }
+
+    @PostMapping("/addVisitor")
+    public @ResponseBody
+    MsgVo addVisitor(@RequestBody @Validated VisitorVo visitorVo) {
+        return MsgVo.SUCCESS;
+    }
 
 }

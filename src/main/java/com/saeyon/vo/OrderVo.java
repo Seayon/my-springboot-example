@@ -4,8 +4,10 @@ import com.saeyon.sys.validator.AgeCheck;
 import com.saeyon.sys.validator.UserCheck;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.math.BigDecimal;
 
 /**
  * @BelongProjecet my-springboot-example
@@ -18,16 +20,14 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @UserCheck
-public class UserVo {
+public class OrderVo {
 
-    @NotBlank
-    @AgeCheck
+    private Long id;
+
     private String name;
 
-    @AgeCheck(min = 16, max = 120)
-    private int age;
+    private BigDecimal price;
 
-    @Pattern(regexp = "女|男", message = "性别只能是男或女")
-    private String sex;
+    private BigDecimal count;
 
 }

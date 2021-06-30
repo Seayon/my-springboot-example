@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  * @Version V1.0
  * @Description:
  */
-// @ControllerAdvice
-// @EnableWebMvc
+@ControllerAdvice
+@EnableWebMvc
 class DefaultExceptionHandler implements HandlerExceptionResolver {
 
     @Override
