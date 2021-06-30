@@ -1,5 +1,6 @@
 package com.saeyon.controller;
 
+import com.saeyon.sys.validator.PermGroupSequenceProvider;
 import com.saeyon.vo.MsgVo;
 import com.saeyon.vo.OrderVo;
 import com.saeyon.vo.UserVo;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
 
 /**
  * @BelongProjecet my-springboot-example
@@ -56,7 +58,7 @@ public class ValidatorTestController {
      */
     @PostMapping("/simple_param_with_body")
     public @ResponseBody
-    MsgVo testWithBody(@RequestBody @Validated UserVo userVo, Errors errors) {
+    MsgVo testWithBody(@RequestBody @Validated({PermGroupSequenceProvider.Manager.class}) UserVo userVo, Errors errors) {
         if (errors.hasErrors()) {
             StringBuilder errMsg = new StringBuilder();
             errors.getAllErrors().forEach(objectError -> {
@@ -75,8 +77,15 @@ public class ValidatorTestController {
 
     @PostMapping("/addVisitor")
     public @ResponseBody
-    MsgVo addVisitor(@RequestBody @Validated VisitorVo visitorVo) {
+    MsgVo addVisitor(@RequestBody @Validated({VisitorVo.Add.class, Default.class}) VisitorVo visitorVo) {
         return MsgVo.SUCCESS;
     }
+
+    @PostMapping("/queryVisitor")
+    public @ResponseBody
+    MsgVo queryVisitor(@RequestBody @Validated({VisitorVo.Query.class}) VisitorVo visitorVo) {
+        return MsgVo.SUCCESS;
+    }
+
 
 }
