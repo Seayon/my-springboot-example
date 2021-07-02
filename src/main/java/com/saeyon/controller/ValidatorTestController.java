@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
@@ -25,8 +26,18 @@ import javax.validation.groups.Default;
  */
 @Controller
 @Log4j2
-// @RequestMapping("/validator_test")
+@Validated
 public class ValidatorTestController {
+
+    /**
+     * @param name
+     * @param age
+     */
+    @RequestMapping("/simple_param")
+    public @ResponseBody
+    MsgVo testParam(@Validated @NotNull String name, @Max(160) @NotNull @Valid Integer age) {
+        return MsgVo.SUCCESS;
+    }
 
     /**
      * @param name
@@ -39,18 +50,6 @@ public class ValidatorTestController {
         }
     }
 
-    /**
-     * 这样写不行
-     *
-     * @param name
-     * @param age
-     * @param errorswjd
-     */
-    @RequestMapping("/simple_param")
-    public @ResponseBody
-    MsgVo testParam(@Validated @NotNull String name, @Max(160) @Validated Integer age) {
-        return MsgVo.SUCCESS;
-    }
 
     /**
      * @param userVo 接受参数的对象
@@ -71,7 +70,7 @@ public class ValidatorTestController {
 
     @PostMapping("/addOrder")
     public @ResponseBody
-    MsgVo addOrder(@RequestBody @Validated OrderVo orderVo) {
+    MsgVo addOrder(@RequestBody @Valid OrderVo orderVo) {
         return MsgVo.SUCCESS;
     }
 

@@ -9,6 +9,7 @@ import org.hibernate.validator.group.GroupSequenceProvider;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.groups.Default;
 
 /**
  * @BelongProjecet my-springboot-example
@@ -28,7 +29,7 @@ public class UserVo {
     @AgeCheck
     private String name;
 
-    @AgeCheck(min = 16, max = 120, groups = {PermGroupSequenceProvider.Employee.class})
+    @AgeCheck(min = 16, max = 120, groups = {PermGroupSequenceProvider.Employee.class, Default.class})
     private int age;
 
     @Pattern(regexp = "女|男", message = "性别只能是男或女", groups = {PermGroupSequenceProvider.Manager.class})
